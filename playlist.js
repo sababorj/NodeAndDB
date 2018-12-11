@@ -16,7 +16,7 @@ connection.connect((err) => {
 })
 
 function runQuery() {
-    connection.query('SELECT * FROM songs Where (genre = "Pop");', (err, res) => {
+    connection.query('SELECT * FROM songs Where ?', {genre : 'Pop'} ,(err, res) => {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
             console.log(res[i].title)
