@@ -8,14 +8,18 @@ var connection = mysql.createConnection({
     database: 'playlist_db'
 });
 
-connection.connect((err)=>{
+connection.connect((err) => {
     if (err) throw err;
     console.log(`connected as id ${connection.threadId}`);
-    connection.query('SELECT * FROM songs Where (genre = "Pop");', (err, res) => {
-        if(err) throw err;
-        for(var i=0; i<res.length; i++){
-        console.log(res[i].title)
-        }
-        connection.end()
-    })
+    runQuery();
+    connection.end();
 })
+
+function runQuery() {
+    connection.query('SELECT * FROM songs Where (genre = "Pop");', (err, res) => {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].title)
+        }
+    })
+}
